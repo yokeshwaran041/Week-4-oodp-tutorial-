@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class MovieTicket {
+private:
+    string movieName;
+    int seatNumber;
+    float price;
+    bool isBooked;
+
+public:
+    MovieTicket(string name, int seat, float p) {
+        movieName = name;
+        seatNumber = seat;
+        price = p;
+        isBooked = false;
+    }
+
+    ~MovieTicket() {
+        cout << "Ticket for seat " << seatNumber << " deleted." << endl;
+    }
+
+    void bookTicket() {
+        if (!isBooked) {
+            isBooked = true;
+            cout << "Ticket for seat " << seatNumber << " booked successfully." << endl;
+        } else {
+            cout << "Seat " << seatNumber << " is already booked." << endl;
+        }
+    }
+
+    void cancelTicket() {
+        if (isBooked) {
+            isBooked = false;
+            cout << "Ticket for seat " << seatNumber << " has been cancelled." << endl;
+        } else {
+            cout << "Seat " << seatNumber << " is not booked yet." << endl;
+        }
+    }
+
+    void displayTicketDetails() {
+        cout << "Movie: " << movieName << endl;
+        cout << "Seat Number: " << seatNumber << endl;
+        cout << "Price: " << price << endl;
+        cout << "Status: " << (isBooked ? "Booked" : "Available") << endl;
+    }
+};
+
+int main() {
+    MovieTicket t1("Avengers", 1, 150.0);
+    MovieTicket t2("Avengers", 2, 150.0);
+    MovieTicket t3("Avengers", 3, 150.0);
+
+    t1.bookTicket();
+    t2.bookTicket();
+    t1.bookTicket();
+
+    t2.cancelTicket();
+    t3.cancelTicket();
+
+    cout << endl;
+
+    t1.displayTicketDetails();
+    cout << endl;
+    t2.displayTicketDetails();
+    cout << endl;
+    t3.displayTicketDetails();
+
+    return 0;
+}
